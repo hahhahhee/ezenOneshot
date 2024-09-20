@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
+    <!-- <script src="http://code.jquery.com/jquery-3.1.1.js"></script> -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<!--    <script src="./js/bootstrap.bundle.min.js"></script>-->
+    <script src="./js/script.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>우리술한잔</title>
+</head>
+<body>
+<!-- 내비게이션 바 추가 -->
+<nav th:replace="~{layout/navbar :: navbarFragment}"></nav>
+<!-- 헤더 영역 추가 -->
+<header th:replace="~{layout/header :: header}"></header>
+<!-- 기본 템플릿 안에 삽입될 내용 Start -->
+<th:block layout:fragment="content"></th:block>
+<!-- 푸터 영역 추가 -->
+<footer th:replace="~{layout/footer :: footer}"></footer>
+<!-- 기본 템플릿 안에 삽입될 내용 end-->
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
