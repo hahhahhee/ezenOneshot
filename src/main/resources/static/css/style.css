@@ -8,10 +8,10 @@
 
 body{
     margin:0;padding:0;
-    box-sizing: border-box;    
+    box-sizing: border-box;
 }
 
-h3{
+h3, h2, span{
     font-family: "Sunflower", sans-serif;
 }
 
@@ -20,7 +20,7 @@ h3{
 header {
     position: relative;
     width: 100%;
-    background-image: url("../image/header1.jpg");
+    background-image: url("../image/header2.jpg");
     background-size: cover;
     background-position: center;
 }
@@ -33,50 +33,50 @@ header {
 
 @media (min-width: 576px) and (max-width: 768px) { /* MD 사이즈 */
     header {
-        background-size: cover; 
+        background-size: cover;
     }
 }
 
 
 .cover{
-	position:absolute;
+    position:absolute;
     width:100%;
-	height:100%;
+    height:100%;
     top: 0;
     left: 0;;
-	overflow:hidden;
+    overflow:hidden;
     z-index: 10;
 }
 
 .cover .start_cover{
-	position:absolute;
-	left:0;
-	top:0;
-	background-color:#DECCB6;
+    position:absolute;
+    left:0;
+    top:0;
+    background-color:#DECCB6;
     opacity: 0.5;
-	width:100%;
-	height:100%;
+    width:100%;
+    height:100%;
 }
 
 
 .cover .main_logo{
-	position:absolute;
-	left:50%;
-	top:50%;
-	transform:translate(-50%,-50%);
-	height:auto;
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    height:auto;
 }
 
 .cover .main_logo img{
-	width:230px;
-	height:auto;
-	display:block;
-	animation:logo 4s forwards;
+    width:230px;
+    height:auto;
+    display:block;
+    animation:logo 4s forwards;
 }
 
 @keyframes logo{
-	0%{opacity:0;}
-	100%{opacity:1;}
+    0%{opacity:0;}
+    100%{opacity:1;}
 }
 
 
@@ -87,10 +87,22 @@ header {
 }
 
 /* nav  */
-nav > ul > li:hover{
-    background-color: #DECCB6;
-    border-bottom: 2px solid #8B7C67;
+.border-line {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    width: 0;
+    height: 2px;
+    background-color: #8B7C67;
+    transition: width 0.3s ease, left 0.3s ease;
 }
+
+.nav-item:hover .border-line {
+    width: 100%;
+    left: 0;
+}
+
 
 nav ul li a{
     font-family: "Sunflower", sans-serif;
@@ -106,12 +118,12 @@ nav ul li a{
     float: left;
     visibility: hidden;
     opacity: 0;
-    position: absolute; 
+    position: absolute;
     background-color: #DECCB6;
-    border: 1px solid #ccc; 
+    border: 1px solid #ccc;
     z-index: 1000;
     margin-top: 0;
-    transform: translateY(-10px); 
+    transform: translateY(-10px);
     transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
 }
 
@@ -131,14 +143,14 @@ nav ul li a{
 
 .nav-item:hover .sub_menu {
     visibility: visible;
-    opacity: 1; 
-    transform: translateY(0); 
+    opacity: 1;
+    transform: translateY(0);
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 
 
- 
+
 nav .line{
     position:absolute;
     left:0;
@@ -149,17 +161,15 @@ nav .line{
     background-color: #cabfae;
 }
 
-
-.animate {
-    opacity: 0; 
-    transform: translateY(30px); 
-    transition: opacity 0.3s ease, transform 0.5s ease; 
+.navbar {
+    transition: background-color 0.3s ease;
 }
 
-.animate.show {
-    opacity: 1; 
-    transform: translateY(0); 
+.navbar.scrolled {
+    background-color: rgba(255, 255, 255, 0.9);
 }
+
+
 
 
 
@@ -171,7 +181,7 @@ nav .line{
     background-image: url(../image/se1img.jpg);
     background-size: cover;
     background-position: center;
-   
+
 }
 
 #se1{
@@ -190,12 +200,20 @@ nav .line{
     z-index: -100;
 }
 
+.animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.animate.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 
 /* secton2 */
-.se2img{
-    background-image: url(../image/se2img1.jpg);
-    background-size: cover;
-}
+
 
 .se2box {
     position: relative;
@@ -210,7 +228,7 @@ nav .line{
 
 #se2pa {
     position: relative;
-    margin-top: 50px; 
+    margin-top: 50px;
 }
 
 .se2box2 {
@@ -223,7 +241,7 @@ nav .line{
     .se2box {
         left: 0; /* 원래 위치로 돌아오게 조정 */
     }
-    
+
     .se2box2 {
         left: 0; /* 원래 위치로 돌아오게 조정 */
         justify-content: center; /* 중앙 정렬 */
@@ -234,7 +252,92 @@ nav .line{
     }
 }
 
+.se2box {
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: transform 1s ease, opacity 0.5s ease;
+}
 
+#se2pa.visible .se2box {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* 호버 */
+.se2img {
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.se2img::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(0, 0, 0, 0.7));
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+}
+
+.se2img:hover::before {
+    transform: translateY(0);
+}
+
+.se2img:hover {
+    transform: scale(1.05);
+}
+
+.overlay-text {
+    position: relative;
+    color: white;
+    font-size: 24px;
+    z-index: 1; /* 텍스트가 위에 오도록 설정 */
+    transition: opacity 0.3s ease;
+    opacity: 0.8; /* 기본 상태에서 투명도 설정 */
+}
+
+.se2img:hover .overlay-text {
+    opacity: 1; /* 호버 시 투명도 변경 */
+}
+
+/* se2이미지 */
+
+#img1{
+    background-image: url(../image/se2img1.jpg);
+    background-size: cover;
+}
+
+#img2{
+    background-image: url(../image/se2img2.jpg);
+    background-size: cover;
+}
+
+#img3{
+    background-image: url(../image/se2img3.jpg);
+    background-size: cover;
+}
+
+#img4{
+    background-image: url(../image/se2img4.jpg);
+    background-size: cover;
+}
+
+#img5{
+    background-image: url(../image/se2img5.jpg);
+    background-size: cover;
+}
+
+#img6{
+    background-image: url(../image/se2img6.jpg);
+    background-size: cover;
+}
 
 
 /* footer */
@@ -257,6 +360,13 @@ footer p{
 }
 
 
+.icon-hover {
+    transition: transform 0.2s ease;
+}
+
+.icon-hover:hover {
+    transform: scale(1.2);
+}
 
 
 

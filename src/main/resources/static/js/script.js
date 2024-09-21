@@ -45,16 +45,29 @@ $(function(){
 
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    const navbar = document.querySelector('.navbar');
+
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) { // 스크롤 위치가 50px을 넘으면
+            navbar.classList.add('scrolled'); // 배경색 변경 클래스 추가
+        } else {
+            navbar.classList.remove('scrolled'); // 클래스 제거
+        }
+    });
+});
 
 
-//아래에서  위
+
+
+// se1 아래에서  위
 document.addEventListener("DOMContentLoaded", function() {
     const animateElements = document.querySelectorAll('.animate');
 
     const observerOptions = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.2 // 20%가 보일 때 애니메이션 시작
+        threshold: 0.3 // 20%가 보일 때 애니메이션 시작
     };
 
     const observer = new IntersectionObserver((entries, observer) => {
@@ -69,6 +82,53 @@ document.addEventListener("DOMContentLoaded", function() {
     animateElements.forEach(element => {
         observer.observe(element); 
     });
+});
+
+// se2
+document.addEventListener("DOMContentLoaded", function() {
+    const se2pa = document.getElementById("se2pa");
+
+    function checkVisibility() {
+        const rect = se2pa.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+
+        // 요소가 뷰포트 안에 들어왔는지 확인
+        if (rect.top < windowHeight && rect.bottom > 0) {
+            se2pa.classList.add("visible"); // 보일 때 애니메이션 클래스 추가
+        } else {
+            se2pa.classList.remove("visible"); // 보이지 않을 때 애니메이션 클래스 제거
+        }
+    }
+
+    // 스크롤 및 리사이즈 이벤트 리스너 추가
+    window.addEventListener("scroll", checkVisibility);
+    window.addEventListener("resize", checkVisibility);
+    
+    // 페이지 로드 시 초기 확인
+    checkVisibility();
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    const images = document.querySelectorAll('.se2img');
+
+    function checkVisibility() {
+        const windowHeight = window.innerHeight;
+
+        images.forEach(image => {
+            const rect = image.getBoundingClientRect();
+            if (rect.top < windowHeight && rect.bottom > 0) {
+                image.classList.add("visible"); // 보일 때 클래스를 추가
+            }
+        });
+    }
+
+    window.addEventListener("scroll", checkVisibility);
+    window.addEventListener("resize", checkVisibility);
+    
+    // 페이지 로드 시 초기 확인
+    checkVisibility();
 });
 
 

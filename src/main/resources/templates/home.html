@@ -1,5 +1,5 @@
 <html lang="ko" layout:decorate="~{layout/home_layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<section layout:fragment="content">
+<section layout:fragment="home_content">
     <!--section1 시작-->
     <section id="se1" class="my-5 sm-order-1">
         <div class="sebox2 d-none d-sm-block"></div>
@@ -24,7 +24,7 @@
                         <p>이런 기본 분류를 차치하고 전국 각지에서 생산되는 다양한 곡류, 과실, 약재, 허브, 꽃 등이 술에 적용되고 있다. 여기에 다양한 컨셉이 더해지니 맛의 확장성과 매력도가 증폭된다.</p>
                     </div>
                 </div>
-                <div class="bo col-md-6 col-lg-6 se1box animate sm-order-3">
+                <div class="bo col-md-6 col-lg-6 se2box animate sm-order-3">
                     <div class="text-white p-3"></div>
                 </div>
             </div>
@@ -41,41 +41,79 @@
             <div class="col-lg-6">
                 <div class="se2box2 row m-3 justify-content-end flex-column flex-sm-row">
                     <div class="col-12 col-sm-6 col-md-4 mb-3">
-                        <div class="bg-warning se2img" style="height: 300px;"></div>
+                        <div id="img1" class="se2img">
+                            <span class="overlay-text">과실주</span>
+                        </div>
                     </div>
                     <div class="col-12 col-sm-6 col-md-4 mb-3">
-                        <div class="bg-warning se2img" style="height: 300px;"></div>
+                        <div id="img2"  class="se2img">
+                            <span class="overlay-text">청주</span>
+                        </div>
                     </div>
                     <div class="col-12 col-sm-6 col-md-4 mb-3">
-                        <div class="bg-warning se2img" style="height: 300px;"></div>
+                        <div id="img3"  class="se2img">
+                            <span class="overlay-text">탁주</span>
+                        </div>
                     </div>
                     <div class="col-12 col-sm-6 col-md-4 mb-3">
-                        <div class="bg-warning se2img" style="height: 300px;"></div>
+                        <div id="img4"  class="se2img">
+                            <span class="overlay-text">증류주</span>
+                        </div>
                     </div>
                     <div class="col-12 col-sm-6 col-md-4 mb-3">
-                        <div class="bg-warning se2img" style="height: 300px;"></div>
+                        <div id="img5"  class="se2img">
+                            <span class="overlay-text">기타주류</span>
+                        </div>
                     </div>
                     <div class="col-12 col-sm-6 col-md-4 mb-3">
-                        <div class="bg-warning se2img" style="height: 300px;"></div>
+                        <div id="img6"  class="se2img">
+                            <span class="overlay-text">전체보기</span>
+                        </div>
                     </div>
                 </div>
             </div>
+
+
         </div>
     </section>
 
     <!--section2 끝-->
     <!--section3 시작-->
-    <section class="container my-5">
-        <div class="bg-danger-subtle" style="height: 300px; width: 100%;" height></div>
+    <section class="container text-center my-5 pt-3">
+        <h2 class="my-5">우리술 Story<i class="bi bi-file-earmark-play mx-2"></i></h2>
+        <div class="row">
+            <div class="col-lg-6 mb-4 rounded-1">
+                <div class="bg-danger-subtle" style="height: 300px;">
+                    <iframe width="100%" height="100%" src="https://youtu.be/VXGqu4bK3VE?si=QPpAuPny7hf_Lm4f" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4 rounded-1">
+                <div class="bg-danger-subtle" style="height: 300px;">
+                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/LAbN5k5nGEc?si=IIgkb_ktO0dojl8Z" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
     </section>
+
     <!--section3 끝-->
 
     <!--section4 시작-->
-    <section class="container-fluid my-5">
-        <div class="bg-warning-subtle rounded-5" style="height: 300px; width: 100%;" height>
-            <div class="text-center">취향테스트</div>
+    <section class="container-fluid text-center my-5">
+        <h2 class="my-5">우리술 Recommendation<i class="bi bi-cup-straw mx-2"></i></h2>
+        <div class="row">
+            <div class="col-12 col-sm-6 mb-3">
+                <div class="bg-warning-subtle rounded-5" style="height: 300px;">
+                    <div class="text-center">취향테스트 1</div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 mb-3">
+                <div class="bg-warning-subtle rounded-5" style="height: 300px;">
+                    <div class="text-center">취향테스트 2</div>
+                </div>
+            </div>
         </div>
     </section>
+
 
     <!--section4 끝-->
 </section>

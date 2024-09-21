@@ -11,8 +11,4 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("/sub")
-    public String sub() {
-        return "sub_index";
-    }
 }
