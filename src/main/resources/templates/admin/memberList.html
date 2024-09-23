@@ -27,8 +27,8 @@
                         <table class="table table-bordered mt-2 text-center">
                             <thead class="thead-light">
                             <tr>
+                                <th scope="col">No</th>
                                 <th scope="col">ID</th>
-                                <th scope="col">로그인 ID</th>
                                 <th scope="col">이름</th>
                                 <th scope="col">생년월일</th>
                                 <th scope="col">이메일</th>
@@ -37,30 +37,39 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <!-- 여기에 회원 정보를 추가하세요 -->
+                            <tr th:each="member : ${members}">
+                                <td th:text="${member.id}">Id</td>
+                                <td th:text="${member.loginId}">loginId</td>
+                                <td th:text="${member.name}">이름</td>
+                                <td th:text="${member.birthdate}">생년월일</td>
+                                <td th:text="${member.email}">이메일</td>
+                                <td th:text="${member.emailOptIn}">이메일 수신 동의</td>
+                                <td>
+                                    <a th:href="@{/members/{id}/delete (id=${member.id})}" role="button" class="btn btn-danger btn-sm">삭제</a>
+                                </td>
+                            </tr>
                             <tr>
                                 <td>1</td>
-                                <td>user01</td>
+                                <td>user123</td>
                                 <td>홍길동</td>
                                 <td>1990-01-01</td>
-                                <td>user01@example.com</td>
-                                <td>예</td>
+                                <td>hong@example.com</td>
+                                <td>동의</td>
                                 <td>
                                     <button class="btn btn-danger btn-sm" onclick="deleteMember(1)">삭제</button>
                                 </td>
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>user02</td>
-                                <td>김철수</td>
-                                <td>1992-05-15</td>
-                                <td>user02@example.com</td>
-                                <td>아니오</td>
+                                <td>jane.doe</td>
+                                <td>제인 도</td>
+                                <td>1985-05-15</td>
+                                <td>jane.doe@example.com</td>
+                                <td>동의 안함</td>
                                 <td>
                                     <button class="btn btn-danger btn-sm" onclick="deleteMember(2)">삭제</button>
                                 </td>
                             </tr>
-                            <!-- 추가 회원 정보가 필요하면 위의 형식으로 계속 추가 -->
                             </tbody>
                         </table>
                     </div>

@@ -1,6 +1,7 @@
 package ezen.oneshot.domain.dto;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,12 +21,12 @@ public class MemberForm {
     @NotEmpty(message = "이름 입력은 필수입니다.")
     private String name;
 
-    @NotEmpty(message = "생년월일 입력은 필수입니다.")
+    @NotNull(message = "생년월일 입력은 필수입니다.")
     private LocalDate birthdate;
 
     private String gender;
 
     private String email;
 
-    private String emailOptIn;
+    private boolean emailOptIn;
 }

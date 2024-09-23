@@ -5,6 +5,7 @@ import ezen.oneshot.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,4 +30,23 @@ public class MemberService {
             throw new IllegalStateException("이미 존재하는 회원입니다");
         }
     }
+
+    // 전체 회원 조회
+    public List<Member> findAll() {
+        return memberRepository.findAll();
+    }
+
+    // 회원 한명 조회
+    public  Optional<Member> findOne(Long memberId) {
+        return memberRepository.findById(memberId);
+    }
+
+    // 회원 삭제
+    public void delete(Member member) {
+        memberRepository.delete(member);
+    }
+
+    // 회원 수정
+
+
 }

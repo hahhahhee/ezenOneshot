@@ -29,5 +29,5 @@ public class Member {
     private String email;
 
     @Column(name = "emailoptin")
-    private String emailOptIn;
+    private boolean emailOptIn;
 }

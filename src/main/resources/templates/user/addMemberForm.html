@@ -73,7 +73,7 @@
                             <div class="form-group row px-1 m-1">
                                 <label th:for="email" class="col-sm-4 col-form-label fw-bold">  이메일</label>
                                 <div class="col-sm-8">
-                                    <input th:field="*{email}" type="email" class="form-control">
+                                    <input th:field="*{email}" type="email" class="form-control" placeholder="abc123@naver.com">
                                 </div>
                             </div>
                             <div class="border-top my-3"></div>
@@ -81,7 +81,7 @@
                             <!-- 체크박스 추가 -->
                             <div class="form-group row px-4">
                                 <div class="form-check">
-                                    <input th:field="*{emailOptIn}" class="form-check-input" type="checkbox">
+                                    <input th:field="*{emailOptIn}" class="form-check-input" type="checkbox" value="true">
                                     <label th:for="emailOptIn" class="form-check-label">(선택) 정보/이벤트 메일 수신에 동의합니다.</label>
                                 </div>
                                 <div class="form-check">
