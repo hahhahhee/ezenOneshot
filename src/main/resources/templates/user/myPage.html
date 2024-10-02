@@ -1,0 +1,156 @@
+<html lang="ko" layout:decorate="~{layout/sub_layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<section layout:fragment="sub_content">
+    <!--header 시작-->
+    <header class="d-flex flex-column justify-content-center align-items-center">
+        <div id="h_box1" class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+            <div class="container p-2 text-center text-white">
+                <h3>My 페이지</h3>
+            </div>
+        </div>
+
+        <div id="h_box2">
+            <div class="container p-2 d-flex justify-content-center">
+                <div class="text-center">
+                    <p class="mx-3"><a href="#memberEdit" class="text-decoration-none text-white fw-bold">회원정보 수정</a></p>
+                    <p class="mx-3"><a href="#questionList" class="text-decoration-none text-white fw-bold">My 질문 리스트</a></p>
+                    <p class="mx-3"><a href="#answerList" class="text-decoration-none text-white fw-bold">My 답변 리스트</a></p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--header 끝-->
+
+    <!-- main 시작 -->
+    <main>
+        <div class="mbox p-3">
+            <div class="container mb-5">
+                <div class="container pt-5 col-sm-12 col-10 col-lg-8">
+                    <div class="alert alert-warning text-start" role="alert">
+                        ※ 회원님께 드리는 당부 말씀 : <br>
+                        악성 댓글이나 부적절한 글을 작성할 경우, 관리자의 강퇴 조치가 있을 수 있습니다. <br>
+                        모두가 쾌적한 환경을 유지할 수 있도록 협조해 주시기 바랍니다.
+                    </div>
+                    <div id="memberEdit" class="bg-white p-4 rounded shadow mb-5">
+                        <h3 class="text-center my-4">회원정보 수정</h3>
+
+                        <form th:object="${memberUpdateForm}" th:action="@{/members/{id}/mypage (id=${loginMember.id})}" method="POST">
+                            <div class="form-group row px-2">
+                                <label th:for="loginId" class="col-sm-4 col-form-label fw-bold">아이디</label>
+                                <div class="col-sm-8">
+                                    <span th:text="${memberUpdateForm.loginId}" class="form-control-plaintext"></span>
+                                </div>
+                            </div>
+                            <div class="border-top my-3"></div>
+
+                            <div class="form-group row px-2">
+                                <label th:for="name" class="col-sm-4 col-form-label fw-bold">이름</label>
+                                <div class="col-sm-8">
+                                    <span th:text="${memberUpdateForm.name}" class="form-control-plaintext"></span>
+                                </div>
+                            </div>
+                            <div class="border-top my-3"></div>
+
+                            <div class="form-group row px-2">
+                                <label th:for="birthdate" class="col-sm-4 col-form-label fw-bold">생년월일</label>
+                                <div class="col-sm-8">
+                                    <span th:text="${#temporals.format(memberUpdateForm.birthdate, 'yyyy-MM-dd')}" class="form-control-plaintext"></span>
+                                    <input type="hidden" th:field="*{birthdate}" />
+                                </div>
+                            </div>
+                            <div class="border-top my-3"></div>
+
+                            <div class="form-group row px-2">
+                                <label th:for="email" class="col-sm-4 col-form-label fw-bold">이메일</label>
+                                <div class="col-sm-8">
+                                    <input th:field="*{email}" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="border-top my-3"></div>
+
+                            <div class="form-group row px-2">
+                                <label th:for="password" class="col-sm-4 col-form-label fw-bold">비밀번호</label>
+                                <div class="col-sm-8">
+                                    <input th:field="*{password}" type="password" class="form-control" placeholder="새로운 비밀번호 입력하기" th:errorclass="field-error"/>
+                                    <div class="field-error" th:errors="*{password}"></div>
+                                </div>
+                            </div>
+                            <div class="border-top my-3"></div>
+
+                            <div class="form-group row px-4">
+                                <div class="form-check">
+                                    <input th:field="*{emailOptIn}" class="form-check-input" type="checkbox" th:checked="${memberUpdateForm.emailOptIn}" />
+                                    <label th:for="emailOptIn" class="form-check-label">(선택) 정보/이벤트 메일 수신에 동의합니다.</label>
+                                </div>
+                            </div>
+
+                            <div class="row my-5">
+                                <div class="form-group">
+                                    <div class="d-flex justify-content-evenly">
+                                        <button type="button" class="btn btn-secondary btn-responsive" onclick="window.history.back();">취소</button>
+                                        <button type="submit" class="btn btn-success btn-responsive">수정 완료</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+
+                    <div id="questionList" class="bg-white p-4 rounded shadow mb-5">
+                        <h3 class="text-center my-4">My 질문 리스트</h3>
+                        <table class="table table-hover text-center table-light">
+                            <thead>
+                            <tr>
+                                <th style="background-color: antiquewhite;">번호</th>
+                                <th style="width: 50%; background-color: antiquewhite;">제목</th>
+                                <th style="background-color: antiquewhite;">글쓴이</th>
+                                <th style="background-color: antiquewhite;">작성일</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="question : ${questionList}">
+                                <td class="fw-normal" th:text="${question.id}"></td>
+                                <td class="fw-normal"><a th:href="@{/question/detail/{id} (id=${question.id})}" th:text="${question.subject}"></a></td>
+                                <td class="fw-normal" th:text="${question.author.loginId}"></td>
+                                <td class="fw-normal" th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+                            </tr>
+                            <tr th:if="${#lists.isEmpty(questionList)}">
+                                <td colspan="4" class="text-center">회원님의 질문 게시글이 없습니다.</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="answerList" class="bg-white p-4 rounded shadow mb-5">
+                        <h3 class="text-center my-4">My 댓글 리스트</h3>
+                        <table class="table table-hover text-center table-light">
+                            <thead>
+                            <tr>
+                                <th style="background-color: antiquewhite;">번호</th>
+                                <th style="width: 50%; background-color: antiquewhite;">제목</th>
+                                <th style="background-color: antiquewhite;">글쓴이</th>
+                                <th style="background-color: antiquewhite;">작성일</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="answer : ${answerList}">
+                                <td class="fw-normal" th:text="${answer.question.id}"></td>
+                                <td class="fw-normal">
+                                    <a th:href="@{/question/detail/{id} (id=${answer.question.id})}" th:text="${answer.question.subject}"></a>
+                                </td>
+                                <td class="fw-normal" th:text="${answer.author.loginId}"></td>
+                                <td class="fw-normal" th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+                            </tr>
+                            <tr th:if="${#lists.isEmpty(answerList)}">
+                                <td colspan="4" class="text-center">회원님의 댓글 게시글이 없습니다.</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- main 끝 -->
+</section>
+</html>

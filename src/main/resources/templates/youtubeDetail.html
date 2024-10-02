@@ -1,0 +1,32 @@
+<html lang="ko" layout:decorate="~{layout/sub_layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<section layout:fragment="sub_content">
+    <header class="d-flex flex-column justify-content-center align-items-center">
+        <div id="h_box1" class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+            <div class="container p-2 text-center text-white">
+                <h3>우리술 Talk</h3>
+            </div>
+        </div>
+
+        <div id="h_box2">
+            <div class="container p-2 d-flex justify-content-center">
+                <div class="text-center">
+                    <p class="mx-3"><a href="#" class="text-decoration-none text-white fw-bold">우리술 TV</a></p>
+                    <p class="mx-3"><a href="#" class="text-decoration-none text-white fw-bold">우리술 Talk</a></p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="mbox">
+            <div class="container col-8">
+                <div class="row">
+                    <div id="videoDetail" class="mt-5 mb-5"></div>
+                    <div class="d-grid gap-2 mt-4 mb-5 d-md-flex justify-content-end">
+                        <button type="button" class="btn btn-outline-secondary" th:onclick="|location.href='@{/youtube}'|">목록으로</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</section>
+</html>

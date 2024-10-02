@@ -1,6 +1,6 @@
 package ezen.oneshot.controller;
 
-import ezen.oneshot.domain.dao.Member;
+import ezen.oneshot.domain.dao.Membership;
 import ezen.oneshot.domain.dto.MemberForm;
 import ezen.oneshot.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -31,43 +31,37 @@ public class MemberController {
             return "user/addMemberForm";
         }
 
-        Member member = new Member();
-        member.setLoginId(form.getLoginId());
-        member.setPassword(form.getPassword());
-        member.setName(form.getName());
-        member.setBirthdate(form.getBirthdate());
-        member.setGender(form.getGender());
-        member.setEmail(form.getEmail());
-        member.setEmailOptIn(form.isEmailOptIn());
+        Membership membership = new Membership();
+        membership.setLoginId(form.getLoginId());
+        membership.setPassword(form.getPassword());
+        membership.setName(form.getName());
+        membership.setBirthdate(form.getBirthdate());
+        membership.setGender(form.getGender());
+        membership.setEmail(form.getEmail());
+        membership.setEmailOptIn(form.isEmailOptIn());
 
-        memberService.join(member);
+        memberService.join(membership);
         return "redirect:/";
     }
 
-    // 멤버 수정폼 보여주기 - 마이페이지
-
-
-    // 멤버 수정하고 저장하기
-
-
-
-    // 회원 목록 보기 - 관리자 Page (Admin)
+    // 회원 목록 보기 - 관리자 Page
     @GetMapping("/members")
-    public String list(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember, Model model) {
-        List<Member> members = memberService.findAll();
+    public String list(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Membership loginMember, Model model) {
+        List<Membership> members = memberService.findAll();
         model.addAttribute("members", members);
         model.addAttribute("loginMember", loginMember);
         return "admin/memberList";
     }
 
-    // 회원 삭제 하기 - 관리자 Page (Admin)
-    @GetMapping("/members/{memberid}/delete")
+    // 회원 삭제 하기 - 관리자 Page
+    @PostMapping("/members/{memberid}/delete")
     public String delete(@PathVariable(value = "memberid") Long memberid) {
-        Optional<Member> findMember = memberService.findOne(memberid);
+        Optional<Membership> findMember = memberService.findOne(memberid);
 
         if (findMember.isPresent()) {
-            memberService.delete(findMember.get());
+            memberService.delete(memberid);
         }
         return "redirect:/members";
     }
+
 }

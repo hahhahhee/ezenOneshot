@@ -15,28 +15,29 @@ h3, h2, span{
     font-family: "Sunflower", sans-serif;
 }
 
+
 /* 첫시작 */
 
 header {
     position: relative;
-    width: 100%;
-    background-image: url("../image/header2.jpg");
-    background-size: cover;
-    background-position: center;
 }
 
-@media (max-width: 576px) { /* SM 사이즈 */
+.carousel-inner img {
+    height: 1000px;
+}
+
+
+/* @media (max-width: 576px) {
     header {
         background-size: cover;
     }
 }
 
-@media (min-width: 576px) and (max-width: 768px) { /* MD 사이즈 */
+@media (min-width: 576px) and (max-width: 768px) {
     header {
         background-size: cover;
     }
-}
-
+} */
 
 .cover{
     position:absolute;
@@ -106,7 +107,12 @@ header {
 
 nav ul li a{
     font-family: "Sunflower", sans-serif;
-    color: #8B7C67
+    color: black;
+}
+
+nav ul > li > ul > li > a{
+    font-family: "Sunflower", sans-serif;
+    color: black;
 }
 
 
@@ -119,8 +125,7 @@ nav ul li a{
     visibility: hidden;
     opacity: 0;
     position: absolute;
-    background-color: #DECCB6;
-    border: 1px solid #ccc;
+    background-color: #cbbca8;
     z-index: 1000;
     margin-top: 0;
     transform: translateY(-10px);
@@ -158,8 +163,9 @@ nav .line{
     width:0%;
     height:5px;
     opacity: 0.6;
-    background-color: #cabfae;
+    background-color: #8B7C67;
 }
+
 
 .navbar {
     transition: background-color 0.3s ease;
@@ -175,10 +181,19 @@ nav .line{
 
 
 /* secton1 */
-.se1box{
+.se11{
     width: 500px;
     height: 400px;
-    background-image: url(../image/se1img.jpg);
+    background-image: url(../image/se11.jpg);
+    background-size: cover;
+    background-position: center;
+
+}
+
+.se12{
+    width: 500px;
+    height: 400px;
+    background-image: url(../image/se12.jpg);
     background-size: cover;
     background-position: center;
 
@@ -211,6 +226,13 @@ nav .line{
     transform: translateY(0);
 }
 
+@media (max-width: 576px) {
+    .a {
+        padding: 0;
+        margin: 0;
+    }
+}
+
 
 /* secton2 */
 
@@ -223,7 +245,7 @@ nav .line{
     width: 80%;
     height: 220px;
     background-color: #cabfae;
-    opacity: 0.5;
+    opacity: 0.2;
 }
 
 #se2pa {
@@ -255,13 +277,25 @@ nav .line{
 .se2box {
     transform: translateX(-100%);
     opacity: 0;
-    transition: transform 1s ease, opacity 0.5s ease;
+    transition: transform 1.5s ease, opacity 0.5s ease;
 }
 
 #se2pa.visible .se2box {
     transform: translateX(0);
     opacity: 1;
 }
+
+.se2img {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.se2img.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 
 /* 호버 */
 .se2img {
@@ -298,13 +332,13 @@ nav .line{
     position: relative;
     color: white;
     font-size: 24px;
-    z-index: 1; /* 텍스트가 위에 오도록 설정 */
+    z-index: 1;
     transition: opacity 0.3s ease;
-    opacity: 0.8; /* 기본 상태에서 투명도 설정 */
+    opacity: 0.8; /
 }
 
 .se2img:hover .overlay-text {
-    opacity: 1; /* 호버 시 투명도 변경 */
+    opacity: 1;
 }
 
 /* se2이미지 */
@@ -338,7 +372,59 @@ nav .line{
     background-image: url(../image/se2img6.jpg);
     background-size: cover;
 }
+/*section3*/
 
+@keyframes bounce1 {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-10px);
+    }
+}
+
+.animated-icon1 {
+    display: inline-block;
+    animation: bounce1 1s infinite;
+}
+
+@media (max-width: 576px) { /* SM 사이즈 */
+    .se3font {
+        font-size: 14px;
+    }
+}
+
+
+/* section4 */
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.animated-icon {
+    display: inline-block;
+    animation: bounce 1s infinite;
+}
+
+
+@media (max-width: 576px) { /* SM 사이즈 */
+    .se4 {
+        width: 460px;
+    }
+}
+
+.se4 {
+    transition: transform 0.3s;
+}
+
+.se4:hover {
+    transform: scale(1.05);
+}
 
 /* footer */
 footer{

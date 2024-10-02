@@ -1,7 +1,7 @@
 <nav th:fragment="navbarFragment" class="navbar navbar-expand-md fixed-top">
     <div class="container-fluid">
-        <a class="logo-font navbar-brand haelogo" href="index.html">
-            <img src="./image/headerlogo.png" alt="로고" class="mx-1">우리술한잔
+        <a class="logo-font navbar-brand haelogo" href="/">
+            <img th:src="@{/image/haederlogo.png}" alt="로고" class="mx-1">우리술한잔
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menubar"
                 aria-controls="menubar" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,7 +10,7 @@
         <div class="collapse navbar-collapse" id="menubar">
             <ul class="navbar-nav ms-auto mb-2 mb-md-0">
                 <li class="nav-item position-relative">
-                    <a class="nav-link" href="#"><i class="bi bi-house-door-fill"></i></a>
+                    <a class="nav-link" href="/"><i class="bi bi-house-door-fill"></i></a>
                     <span class="border-line"></span>
                 </li>
                 <li class="nav-item">
@@ -23,8 +23,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">우리술 STORY</a>
                     <ul class="d-flex flex-column navbar-nav ms-auto mb-2 mb-md-0 sub_menu rounded-2">
-                        <li><a class="nav-link dropdown-menu d-flex flex-column" href="#">우리술 TV</a></li>
-                        <li><a class="nav-link dropdown-menu d-flex flex-column" href="#">우리술 Talk</a></li>
+                        <li><a class="nav-link dropdown-menu d-flex flex-column" th:href="@{/youtube}">우리술 TV</a></li>
+                        <li><a class="nav-link dropdown-menu d-flex flex-column" th:href="@{/question/list}">우리술 Talk</a></li>
                     </ul>
                 </li>
 
@@ -34,22 +34,30 @@
                 </li>
 
                 <li class="nav-item position-relative" th:if="${loginMember}">
-                    <span class="nav-link fw-bold" th:text="${loginMember.name}"></span>
+                    <span class="nav-link fw-bold" th:text="${loginMember.loginId}"></span>
                 </li>
 
                 <li class="nav-item position-relative">
                     <div th:if="${loginMember == null}">
-                        <a class="nav-link" href="#">로그인</a>
+                        <a class="nav-link" href="/login">로그인</a>
                         <span class="border-line"></span>
                     </div>
                     <div th:if="${loginMember}">
-                        <a class="nav-link navself" href="#"><i class="bi bi-person-fill"></i></a>
-                        <ul class="d-flex flex-column navbar-nav ms-auto mb-2 mb-md-0 sub_menu rounded-2">
-                            <li><a class="nav-link" href="#">로그아웃</a></li>
-                            <li><a class="nav-link dropdown-menu d-flex flex-column" href="#">마이페이지</a></li>
-                            <li><a class="nav-link dropdown-menu d-flex flex-column" href="#">회원관리</a></li>
+                        <a class="nav-link" href="#"><i class="bi bi-person-fill"></i></a>
+                        <ul class="d-flex flex-column navbar-nav ms-auto mb-2 mb-md-0 sub_menu rounded-2 menu1">
+                            <li>
+                                <form th:action="@{/logout}" method="post" style="display: inline;">
+                                    <button type="submit" class="nav-link dropdown-menu d-flex flex-column"><a>로그아웃</a></button>
+                                </form>
+                            </li>
+                            <li>
+                                <a class="nav-link dropdown-menu d-flex flex-column"
+                                   th:href="@{/members/{memberid}/mypage (memberid=${loginMember.id})}">마이페이지</a>
+                            </li>
+                            <li><a class="nav-link dropdown-menu d-flex flex-column" href="/members">회원관리</a></li>
                         </ul>
                     </div>
+
                 </li>
             </ul>
         </div>

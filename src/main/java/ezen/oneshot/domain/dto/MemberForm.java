@@ -29,4 +29,7 @@ public class MemberForm {
     private String email;
 
     private boolean emailOptIn;
+
+    // 새로운 필드 추가
+    private boolean isEditable; // 수정 가능 여부
 }

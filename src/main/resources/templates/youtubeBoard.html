@@ -1,0 +1,38 @@
+<html lang="ko" layout:decorate="~{layout/sub_layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<section layout:fragment="sub_content">
+    <!--header 시작-->
+    <header class="d-flex flex-column justify-content-center align-items-center">
+        <div id="h_box1" class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+            <div class="container p-2 text-center text-white">
+                <h3>우리술 Talk</h3>
+            </div>
+        </div>
+
+        <div id="h_box2">
+            <div class="container p-2 d-flex justify-content-center">
+                <div class="text-center">
+                    <p class="mx-3"><a href="#" class="text-decoration-none text-white fw-bold">우리술 TV</a></p>
+                    <p class="mx-3"><a href="#" class="text-decoration-none text-white fw-bold">우리술 Talk</a></p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--header 끝-->
+    <!-- main 시작 -->
+    <main>
+        <div class="mbox">
+            <div class="container">
+                <div class="row py-5  justify-content-evenly">
+                    <div id="videoContainer" class="row" style="text-align: center;"></div>
+                    <div class="pagination justify-content-center">
+                        <button id="prevBtn" class="btn btn-outline-secondary" disabled>이전</button>
+                        <div class="col-1"></div>
+                        <button id="nextBtn" class="btn btn-outline-secondary">다음</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- main 끝 -->
+</section>
+</html>

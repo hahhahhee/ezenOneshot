@@ -1,6 +1,6 @@
 package ezen.oneshot.service;
 
-import ezen.oneshot.domain.dao.Member;
+import ezen.oneshot.domain.dao.Membership;
 import ezen.oneshot.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,12 +13,12 @@ public class LoginService {
 
     private final MemberRepository memberRepository;
 
-    public Member login(String loginId, String password) {
-        Optional<Member> findMemberOptional = memberRepository.findByLoginId(loginId);
+    public Membership login(String loginId, String password) {
+        Optional<Membership> findMemberOptional = memberRepository.findByLoginId(loginId);
         if (findMemberOptional.isPresent()) {
-            Member member = findMemberOptional.get();
-            if (member.getPassword().equals(password)) {
-                return member;
+            Membership membership = findMemberOptional.get();
+            if (membership.getPassword().equals(password)) {
+                return membership;
             }
             else {
                 return null;

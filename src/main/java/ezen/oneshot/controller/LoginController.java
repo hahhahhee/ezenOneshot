@@ -1,6 +1,6 @@
 package ezen.oneshot.controller;
 
-import ezen.oneshot.domain.dao.Member;
+import ezen.oneshot.domain.dao.Membership;
 import ezen.oneshot.domain.dto.LoginForm;
 import ezen.oneshot.service.LoginService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,7 +34,7 @@ public class LoginController {
         if (bindingResult.hasErrors()) {
             return "user/loginForm";
         }
-        Member loginMember = loginService.login(loginForm.getLoginId(), loginForm.getPassword());
+        Membership loginMember = loginService.login(loginForm.getLoginId(), loginForm.getPassword());
 
 //        System.out.println(loginMember.getLoginId());
 
