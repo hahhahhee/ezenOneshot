@@ -1,31 +1,97 @@
+//img
+
+var i = 0;
+var n = null;
+var repeat;
+
+timer();
+
+function timer() {
+    repeat = setInterval(function() {
+        next();
+    }, 3000);
+}
+
+function slider() {
+    // 현재 슬라이드와 이전 슬라이드 설정
+    n = (i === 0) ? 2 : i - 1; // n은 항상 이전 슬라이드 인덱스
+
+    $(".slide_cover li").eq(i).css("z-index", "6").stop().animate({
+        "width": "100%",
+        "opacity": "1"
+    }, 2000, function() {
+        $(window).trigger("resize");
+
+        $(".slide_cover li").eq(n).css({
+            "width": "0",
+            "opacity": "0" // 슬라이드 사라짐
+        });
+
+        $("ul.slide_cover > li").find(".m_textbox").removeClass("on");
+        $("ul.slide_cover > li").eq(i).find(".m_textbox").addClass("on");
+
+        setTimeout(function() {
+            timer();
+        }, 10);
+    });
+
+}
+
+function next() {
+    clearInterval(repeat);
+    i = (i + 1) % 3; // 0, 1, 2 중 하나로 설정
+    slider();
+}
+
+function prev() {
+    clearInterval(repeat);
+    i = (i - 1 + 3) % 3; // 0, 1, 2 중 하나로 설정
+    slider();
+}
 
 
-// // body
-// $(document).ready(function(){
+// header
+$(document).ready(function(){
+    $(window).resize(function(){
+        let h = $(window).height();
+        $(".start_cover").height(h);
+    });
 
-//     $("section").on("mousewheel",wheely);
+    $(window).trigger("resize");
 
-//     function wheely(e){
+    setTimeout(function(){
 
-//         $("section").off("mousewheel");
-//         let y = e.originalEvent.deltaY;
+        $(".start_cover").stop().fadeOut(600);
 
-//         if(y>0){
-//             let scr = $(this).next().offset().top;
+    },3000);
+});
 
-//         }else if(y<0){
-//             let scr = $(this).prev().offset().top;
+// body
+$(document).ready(function() {
 
-//         }
-//         $("html,body").stop().animate({
-//             "scrollTop":scr
-//         },1300,function(){
-//             $("section").on("mousewheel",wheely);
-//         });
-//         return false;
-//     }
+// Intersection Observer 설정
+    const animateElements = document.querySelectorAll('.animate');
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.3 // 30%가 보일 때 애니메이션 시작
+    };
 
-// });
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    animateElements.forEach(element => {
+        observer.observe(element);
+    });
+});
+
+
 
 
 // nav 라인
@@ -57,118 +123,54 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+$(function() {
+    // 작은 화면에서만 아코디언 기능 추가
+    $('.sub-item > a').click(function(e) {
+        if ($(window).width() <= 768) { // sm 이하일 때만 적용
+            e.preventDefault(); // 링크의 기본 동작 방지
+            const target = $(this).next('.collapse'); // 다음 .collapse 요소 선택
 
+            // 현재 메뉴 외의 모든 아코디언 닫기
+            $('.sub-item .collapse').not(target).slideUp(200);
 
-
-// se1 아래에서  위
-document.addEventListener("DOMContentLoaded", function() {
-    const animateElements = document.querySelectorAll('.animate');
-
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.3 // 20%가 보일 때 애니메이션 시작
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('show');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    animateElements.forEach(element => {
-        observer.observe(element);
-    });
-});
-
-// se2
-document.addEventListener("DOMContentLoaded", function() {
-    const se2pa = document.getElementById("se2pa");
-    let hasAnimated = false;
-
-    function checkVisibility() {
-        const rect = se2pa.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-
-        // 요소가 뷰포트 안에 들어왔는지 확인
-        if (!hasAnimated && rect.top < windowHeight && rect.bottom > 0) {
-            se2pa.classList.add("visible"); // 보일 때 애니메이션 클래스 추가
-            hasAnimated = true; // 애니메이션 발생 플래그 설정
+            // 클릭한 메뉴의 아코디언 토글
+            target.stop(true, true).slideToggle(200);
         }
-    }
-
-    // 스크롤 이벤트 리스너 추가
-    window.addEventListener("scroll", checkVisibility);
-
-    // 페이지 로드 시 초기 확인
-    checkVisibility();
+    });
 });
 
-
-
-
-document.addEventListener('DOMContentLoaded', function () {
-    const images = document.querySelectorAll('.se2img');
-
-    function checkVisibility() {
-        const triggerBottom = window.innerHeight * 0.8; // 뷰포트의 80%
-
-        images.forEach(img => {
-            const imgTop = img.getBoundingClientRect().top; // 이미지의 상단 위치
-
-            if (imgTop < triggerBottom) {
-                img.classList.add('visible'); // 클래스 추가
-            }
-        });
-    }
-
-    window.addEventListener('scroll', checkVisibility);
-    checkVisibility(); // 페이지 로드 시 한 번 실행
-});
-
-
-
-
-
-// header
-$(document).ready(function(){
-    $(window).resize(function(){
-
-        let h = $(window).height();
-
-        $(".cover").height(h);
-
-        let w = $(window).width();
-
+$(document).ready(function () {
+    $('.navbar-toggler').click(function () {
+        $('.navbar-nav').collapse('toggle');
     });
 
-    $(window).trigger("resize");
-
-
-    setTimeout(function(){
-
-        $(".start_cover").stop().fadeOut(600);
-
-        $("cover").trigger("play");
-
-    },3000);
+    $('.navbar-toggler').click(function () {
+        $('.navbar-nav').collapse('hide');
+    });
 });
 
+// se6
+$(document).ready(function(){
 
 
+    $(window).scroll(function(){
+        var window_scroll_top = $(window).scrollTop();
 
+        $(".se6_cover").each(function(){
+            var window_height = $(window).height()/1.1;
+            var img_offset = $(this).offset().top-window_height;
 
+            if(window_scroll_top > img_offset){
+                $(this).animate({
+                    "transform":"translateY(0)",
+                    "opacity":"1"
+                },800);
+            }
+        });
+    });
 
+    $(window).trigger("scroll");
 
-
-
-
-
-
-
-
+});
 
 

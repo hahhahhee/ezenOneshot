@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Optional;
 
 @Controller
@@ -41,7 +42,7 @@ public class AnswerController {
             Answer answer = new Answer();
             answer.setQuestion(question.get());
             answer.setContent(answerForm.getContent());
-            answer.setCreateDate(LocalDateTime.now());
+            answer.setCreateDate(LocalDateTime.now(ZoneId.of("Asia/Seoul")));
             answer.setAuthor(loginMember);
             answerService.create(answer);
         }
@@ -74,7 +75,7 @@ public class AnswerController {
         answer.setId(answerId);
         answer.setContent(answerForm.getContent());
         answer.setCreateDate(findAnswer.get().getCreateDate());
-        answer.setModifyDate(LocalDateTime.now());
+        answer.setModifyDate(LocalDateTime.now(ZoneId.of("Asia/Seoul")));
         answer.setAuthor(loginMember);
         answer.setQuestion(findQuestion.get());
         answerService.create(answer);

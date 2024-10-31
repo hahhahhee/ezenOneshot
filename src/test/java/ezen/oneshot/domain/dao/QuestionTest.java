@@ -12,25 +12,25 @@ import java.util.Optional;
 @SpringBootTest
 class QuestionTest {
 
-    @Autowired
-    private QuestionRepository questionRepository;
-    @Autowired
-    private MemberRepository memberRepository;
-
-    // 대량 데이터 삽입하기
-    @Test
-    public void testJpa() {
-
-        Optional<Membership> member = memberRepository.findById(1l);
-
-        for (int i=1; i<=200; i++) {
-            Question question = new Question();
-            question.setSubject("Subject" + i);
-            question.setContent("Content" + i);
-            question.setAuthor(member.get());
-            question.setCreateDate(LocalDateTime.now());
-            questionRepository.save(question);
-        }
-    }
+//    @Autowired
+//    private QuestionRepository questionRepository;
+//    @Autowired
+//    private MemberRepository memberRepository;
+//
+//    // 대량 데이터 삽입하기
+//    @Test
+//    public void testJpa() {
+//
+//        Optional<Membership> member = memberRepository.findById(1l);
+//
+//        for (int i=1; i<=50; i++) {
+//            Question question = new Question();
+//            question.setSubject("Subject" + i);
+//            question.setContent("Content" + i);
+//            question.setAuthor(member.get());
+//            question.setCreateDate(LocalDateTime.now());
+//            questionRepository.save(question);
+//        }
+//    }
 
 }

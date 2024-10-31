@@ -14,8 +14,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -46,16 +48,46 @@ public class MyPageController {
             // 질문 리스트와 답변 리스트 가져오기
             List<Question> questionList = questionService.getQuestions(memberid);
             List<Answer> answerList = answerService.getAnswers(memberid);
+
+            // Set을 사용하여 질문 ID를 기준으로 중복 제거
+            List<Answer> distinctAnswers = answerList.stream()
+                    .filter(new HashSet<>()::add) // Set을 사용해 중복 제거
+                    .collect(Collectors.toList());
+
             model.addAttribute("questionList", questionList);
-            model.addAttribute("answerList", answerList);
+            model.addAttribute("answerList", distinctAnswers);
             return "user/myPage";
         }
         model.addAttribute("loginMember", loginMember);
         return "redirect:/";
     }
 
+    // 마이페이지 회원정보 가져오기
+    @GetMapping("/members/{memberid}/mypage/update")
+    public String myPageUpdateForm(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Membership loginMember, @PathVariable("memberid") Long memberid, Model model) {
+        Optional<Membership> myMemberOne = memberService.findOne(memberid);
+
+        if (myMemberOne.isPresent()) {
+            Membership myMemberGet = myMemberOne.get();
+
+            MemberUpdateForm memberUpdateForm = new MemberUpdateForm();
+            memberUpdateForm.setLoginId(myMemberGet.getLoginId());
+            memberUpdateForm.setName(myMemberGet.getName());
+            memberUpdateForm.setBirthdate(myMemberGet.getBirthdate());
+            memberUpdateForm.setEmail(myMemberGet.getEmail());
+            memberUpdateForm.setEmailOptIn(myMemberGet.isEmailOptIn());
+
+            model.addAttribute("loginMember", loginMember);
+            model.addAttribute("memberUpdateForm", memberUpdateForm);
+
+            return "user/myPageUpdate";
+        }
+        model.addAttribute("loginMember", loginMember);
+        return "redirect:/";
+    }
+
     // 회원 정보 수정하고 저장하기
-    @PostMapping("/members/{memberid}/mypage")
+    @PostMapping("/members/{memberid}/mypage/update")
     public String updateMember(@Validated @ModelAttribute("memberUpdateForm") MemberUpdateForm form, BindingResult bindingResult, @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Membership loginMember, Model model) {
 
         System.out.println("회원 정보 수정 요청 받음: " + form);
@@ -64,7 +96,7 @@ public class MyPageController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("memberUpdateForm", form);
             model.addAttribute("loginMember", loginMember);
-            return "user/myPage";
+            return "user/myPageUpdate";
         }
 
         // 기존 회원 정보를 가져옵니다

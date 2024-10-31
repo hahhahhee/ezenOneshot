@@ -36,8 +36,6 @@ public class LoginController {
         }
         Membership loginMember = loginService.login(loginForm.getLoginId(), loginForm.getPassword());
 
-//        System.out.println(loginMember.getLoginId());
-
         // 글로벌 에러 : bindingResult.reject
         if (loginMember == null) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");

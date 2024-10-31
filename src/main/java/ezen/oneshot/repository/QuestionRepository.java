@@ -12,10 +12,10 @@ import java.util.List;
 public interface QuestionRepository extends JpaRepository<Question, Long> {
 
     // 제목으로 찾기
+    Page<Question> findBySubjectContaining(String subject, Pageable pageable);
 
-
-    // 제목과 내용으로 찾기
-
+    // 내용으로 찾기
+    Page<Question> findByContentContaining(String content, Pageable pageable);
 
     // 회원 ID로 질문 목록 가져오기
     List<Question> findByAuthorId(Long memberId, Sort sort);

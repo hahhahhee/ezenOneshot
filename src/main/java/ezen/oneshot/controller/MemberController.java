@@ -27,10 +27,7 @@ public class MemberController {
 
     @PostMapping("/add")
     public String create(@Validated @ModelAttribute("memberForm") MemberForm form, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "user/addMemberForm";
-        }
-
+        // 회원가입 로직
         Membership membership = new Membership();
         membership.setLoginId(form.getLoginId());
         membership.setPassword(form.getPassword());
@@ -40,13 +37,32 @@ public class MemberController {
         membership.setEmail(form.getEmail());
         membership.setEmailOptIn(form.isEmailOptIn());
 
-        memberService.join(membership);
+        // 나이 검증 로직 호출
+        memberService.validateAge(membership, bindingResult);
+        // 중복회원 검증 로직 호출
+        memberService.validateDuplicateMember(membership, bindingResult);
+
+        // 검증 후 오류가 있을 경우 다시 폼으로 돌아감
+        if (bindingResult.hasErrors()) {
+            return "user/addMemberForm"; // 오류가 있을 경우 폼으로 돌아갑니다.
+        }
+
+        // 회원가입 로직 호출
+        memberService.join(membership, bindingResult);
+
         return "redirect:/";
     }
 
     // 회원 목록 보기 - 관리자 Page
     @GetMapping("/members")
     public String list(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Membership loginMember, Model model) {
+        // 로그인한 사용자가 admin인지 확인
+        if (loginMember == null || !loginMember.getLoginId().equals("admin")) {
+            // admin이 아니면 홈 페이지로 리다이렉트
+            return "redirect:/";
+        }
+
+        // admin일 경우 회원 목록을 가져와서 모델에 추가
         List<Membership> members = memberService.findAll();
         model.addAttribute("members", members);
         model.addAttribute("loginMember", loginMember);

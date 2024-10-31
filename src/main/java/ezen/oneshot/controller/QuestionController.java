@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,7 +50,7 @@ public class QuestionController {
             Question question = new Question();
             question.setSubject(questionForm.getSubject());
             question.setContent(questionForm.getContent());
-            question.setCreateDate(LocalDateTime.now());
+            question.setCreateDate(LocalDateTime.now(ZoneId.of("Asia/Seoul")));
             question.setAuthor(loginMember);
             questionService.create(question);
             model.addAttribute("loginMember", loginMember);
@@ -60,11 +61,12 @@ public class QuestionController {
 
     // 게시글 목록 보기
     @GetMapping("/question/list")
-    public String list(@RequestParam(value = "page", defaultValue = "0") int page, @RequestParam(value = "kw", defaultValue = "") String kw, @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Membership loginMember, Model model) {
-        Page<Question> paging = questionService.getList(page, kw);
+    public String list(@RequestParam(value = "page", defaultValue = "0") int page, @RequestParam(value = "kw", defaultValue = "") String kw, @RequestParam(value = "searchType", defaultValue = "title") String searchType, @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Membership loginMember, Model model) {
+        Page<Question> paging = questionService.getList(page, kw, searchType);
         model.addAttribute("loginMember", loginMember);
         model.addAttribute("paging", paging);
         model.addAttribute("kw", kw);
+        model.addAttribute("searchType", searchType);
         return "talkBoardList";
     }
 
@@ -116,7 +118,7 @@ public class QuestionController {
         question.setSubject(questionForm.getSubject());
         question.setContent(questionForm.getContent());
         question.setCreateDate(findQuestion.get().getCreateDate());
-        question.setModifyDate(LocalDateTime.now());
+        question.setModifyDate(LocalDateTime.now(ZoneId.of("Asia/Seoul")));
         question.setAuthor(loginMember);
         questionService.create(question);
         model.addAttribute("loginMember", loginMember);

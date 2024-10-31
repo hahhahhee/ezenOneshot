@@ -9,7 +9,10 @@ import ezen.oneshot.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,19 +27,39 @@ public class MemberService {
     private final AnswerService answerService;
 
     // 회원가입
-    public Long join(Membership membership) {
+    public Long join(Membership membership, BindingResult bindingResult) {
+        // 중복회원 검증
+        validateDuplicateMember(membership, bindingResult);
 
-        // 같은 이름이 있는 중복회원 검증
-        validateDuplicateMember(membership);
+        // 나이 검증
+        validateAge(membership, bindingResult);
+
+        // 오류가 있는지 체크
+        if (bindingResult.hasErrors()) {
+            return null;
+        }
+
         this.memberRepository.save(membership);
         return membership.getId();
     }
 
+    // 나이 검증 메서드
+    public void validateAge(Membership membership, BindingResult bindingResult) {
+        LocalDate birthdate = membership.getBirthdate();
+
+        if (birthdate != null) {
+            int age = Period.between(birthdate, LocalDate.now()).getYears();
+            if (age < 19) {
+                bindingResult.rejectValue("birthdate", "error.age", "만 19세 이상만 가입할 수 있습니다.");
+            }
+        }
+    }
+
     // 중복회원조회메서드
-    private void validateDuplicateMember(Membership membership) {
-        Optional<Membership> findMemeber = memberRepository.findByLoginId(membership.getLoginId());
-        if (findMemeber.isPresent()) {
-            throw new IllegalStateException("이미 존재하는 회원입니다");
+    public void validateDuplicateMember(Membership membership, BindingResult bindingResult) {
+        Optional<Membership> findMember = memberRepository.findByLoginId(membership.getLoginId());
+        if (findMember.isPresent()) {
+            bindingResult.rejectValue("loginId", "error.loginId", "해당 ID는 이미 사용 중입니다. 다른 ID를 선택해 주세요.");
         }
     }
 

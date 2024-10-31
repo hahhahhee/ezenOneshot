@@ -28,18 +28,22 @@ public class QuestionService {
     }
 
     // 전체 게시글 조회
-    public Page<Question> getList(int page, String kw) {
+    public Page<Question> getList(int page, String kw, String searchType) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
         PageRequest pageable = PageRequest.of(page, 15, Sort.by(sorts));
-        Specification<Question> spec = search(kw);
-        Page<Question> result = questionRepository.findAll(spec, pageable);
-        if (result.hasContent()) {
-            return result;
+
+        // 제목으로 검색
+        if ("title".equals(searchType)) {
+            return questionRepository.findBySubjectContaining(kw, pageable);
         }
-        else {
-            return null;
+        // 내용으로 검색
+        else if ("content".equals(searchType)) {
+            return questionRepository.findByContentContaining(kw, pageable);
         }
+
+        // 기본적으로 모든 질문을 조회
+        return questionRepository.findAll(pageable);
     }
 
     // 게시글 조회
