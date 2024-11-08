@@ -6,6 +6,5 @@
 
 ## 프로젝트 시연 영상
 
+#### 홈 - pc버전
 <video src="https://github.com/user-attachments/assets/ea302332-4735-47fe-906a-1222ce791bc4" width="700" height="370" autoplay muted>
-  Your browser does not support the video tag.
-</video>
