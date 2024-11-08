@@ -10,13 +10,13 @@
 <video src="https://github.com/user-attachments/assets/ea302332-4735-47fe-906a-1222ce791bc4" width="700" height="370" autoplay muted></video>
 
 ##### 홈 - tablet버전
-<video src="https://github.com/user-attachments/assets/ea302332-4735-47fe-906a-1222ce791bc4" width="700" height="370" autoplay muted>
+<video src="https://github.com/user-attachments/assets/ea302332-4735-47fe-906a-1222ce791bc4" width="700" height="370" autoplay muted></video>
 
 ##### 홈 - mobile버전
-
+<video src="https://github.com/user-attachments/assets/ea302332-4735-47fe-906a-1222ce791bc4" width="700" height="370" autoplay muted></video>
   
 ##### 각 페이지의 header 통일성
-<video src="https://github.com/user-attachments/assets/ea302332-4735-47fe-906a-1222ce791bc4" width="700" height="370" autoplay muted>
+<video src="https://github.com/user-attachments/assets/ea302332-4735-47fe-906a-1222ce791bc4" width="700" height="370" autoplay muted></video>
   
 ### 관리자 페이지의 접근 제어
 
@@ -24,4 +24,4 @@
 <video src="https://github.com/user-attachments/assets/ea302332-4735-47fe-906a-1222ce791bc4" width="700" height="370" autoplay muted>
   
 ##### 일반 사용자 혹은 비로그인 시
-<video src="https://github.com/user-attachments/assets/ea302332-4735-47fe-906a-1222ce791bc4" width="700" height="370" autoplay muted>
+<video src="https://github.com/hahhahhee/ezenOneshot/issues/6#issue-2643113321" width="700" height="370" autoplay muted>
