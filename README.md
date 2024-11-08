@@ -9,7 +9,6 @@
 ##### 홈 - pc버전
 <video src="https://github.com/user-attachments/assets/ea302332-4735-47fe-906a-1222ce791bc4" width="700" height="370" autoplay muted>
 
-
 ##### 홈 - tablet버전
 <video src="https://github.com/user-attachments/assets/ea302332-4735-47fe-906a-1222ce791bc4" width="700" height="370" autoplay muted>
 
