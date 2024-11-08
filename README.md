@@ -6,5 +6,5 @@
 
 ## 프로젝트 시연 영상
 
-<video src="https://github.com/user-attachments/assets/ea302332-4735-47fe-906a-1222ce791bc4" width="700" height="370" autoplay muted>
+<video src="https://raw.githubusercontent.com/hahhahhee/ezenOneshot/main/video_part/home_pc.mp4" width="700" height="370" autoplay muted>
 
